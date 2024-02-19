@@ -1,16 +1,26 @@
+<!-- app/views/people/index.html.erb -->
+
 <p style="color: green"><%= notice %></p>
 
-<h1>People</h1>
+<div style="display: flex;">
+  <!-- Master List -->
+  <div style="flex: 1;">
+    <h1>People</h1>
+      <% @people.each do |person| %>
+        <%= turbo_frame_tag "person_#{person.id}" do %>
+          <%= render person %>
+          <p>
+            <%= link_to "Show this person", person, data: { turbo_frame: "person_info" } %>
+            <%= link_to "Edit this person", edit_person_path(person), data: { turbo_frame: "details" } %>
+            <%= button_to "Destroy this person", person_path(person), method: :delete, data: { turbo_frame: "people" } %>
+          </p>
+        <% end %>
+      <% end %>
+      <%= link_to "New person", new_person_path %>
+  </div>
 
-<div id="people">
-  <% @people.each do |person| %>
-    <%= render person %>
-    <p>
-      <%= link_to "Show this person", person %>
-      <%= link_to "Edit this person", edit_person_path(person) %>
-      <%= button_to "Destroy this person", person_path(person), method: :delete %>
-    </p>
-  <% end %>
+  <!-- Detail Section -->
+  <div style="flex: 1; padding-left: 20px;">
+    <%= render "person_info", person: @selected_person %>
+  </div>
 </div>
-
-<%= link_to "New person", new_person_path %>

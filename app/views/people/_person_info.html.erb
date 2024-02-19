@@ -1,0 +1,30 @@
+<%= turbo_frame_tag "person_info" do %>
+<div>
+  <p>
+    <strong>Name:</strong>
+    <%= person.name %>
+  </p>
+
+  <p>
+    <strong>Email:</strong>
+    <%= person.email %>
+  </p>
+
+  <p>
+    <strong>Title:</strong>
+    <%= person.detail.title %>
+  </p>
+
+  <p>
+    <strong>Age:</strong>
+    <%= person.detail.age %>
+  </p>
+
+  <p>
+    <strong>Phone:</strong>
+    <%= person.detail.phone %>
+  </p>
+
+
+</div>
+<%end%>

@@ -4,19 +4,24 @@ class PeopleController < ApplicationController
   # GET /people or /people.json
   def index
     @people = Person.includes(:detail)
-
+    @selected_person = @people.first
     respond_to do |format|
       format.html { render 'index' } 
       format.json { render json: @people, include: :detail } # Render JSON for API
     end
   end
 
+  # def get_person
+  #   render turbo_stream: turbo_stream.replace("person_info", partial: "person_info", locals: { person: Person.find(params[:id]) })
+  # end
   # GET /people/1 or /people/1.json
   def show
-    respond_to do |format|
-      format.html { render 'show' } 
-      format.json { render json: @person, include: :detail } # Render JSON for API
-    end
+    render turbo_stream: turbo_stream.replace("person_info", partial: "person_info", locals: { person: Person.find(params[:id]) })
+
+    # respond_to do |format|
+    #   format.html { render 'show' } 
+    #   format.json { render json: @person, include: :detail } # Render JSON for API
+    # end
   end
 
   # GET /people/new
