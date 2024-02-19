@@ -7,6 +7,8 @@
     <%= render person %>
     <p>
       <%= link_to "Show this person", person %>
+      <%= link_to "Edit this person", edit_person_path(person) %>
+      <%= button_to "Destroy this person", person_path(person), method: :delete %>
     </p>
   <% end %>
 </div>

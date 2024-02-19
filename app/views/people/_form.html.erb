@@ -1,11 +1,10 @@
 <%= form_with(model: person) do |form| %>
   <% if person.errors.any? %>
-    <div style="color: red">
+    <div style="color: red; background: green;">
       <h2><%= pluralize(person.errors.count, "error") %> prohibited this person from being saved:</h2>
-
       <ul>
-        <% person.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <% person.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
         <% end %>
       </ul>
     </div>
@@ -19,6 +18,23 @@
   <div>
     <%= form.label :email, style: "display: block" %>
     <%= form.text_field :email %>
+  </div>
+  <div>
+
+  <%= form.fields_for :detail do |detail_form| %>
+    <div>
+    <%= detail_form.label :title, style: "display: block" %>
+    <%= detail_form.text_field :title %>
+    </div>
+    <div>
+    <%= detail_form.label :age, style: "display: block" %>
+    <%= detail_form.number_field :age %>
+    </div>
+    <div>
+    <%= detail_form.label :phone, style: "display: block" %>
+    <%= detail_form.text_field :phone %>
+    </div>
+  <% end %>
   </div>
 
   <div>
